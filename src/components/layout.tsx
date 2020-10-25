@@ -1,4 +1,3 @@
-import {FC} from "react";
 import * as React from "react";
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
@@ -8,11 +7,13 @@ import Link from 'next/link'
 const name = 'care0717'
 export const siteTitle = 'Next.js Sample Website'
 
-type Props = {
-    home?: boolean;
-}
-
-const Layout: FC<Props> = ({children, home}) => {
+const Layout = ({
+                    children,
+                    home
+}: {
+    children: React.ReactNode
+    home?: boolean
+}) => {
     return (
         <div className={styles.container}>
             <Head>

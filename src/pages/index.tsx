@@ -5,8 +5,9 @@ import {FC} from "react";
 import { getSortedPostsData, PostData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { GetStaticProps } from 'next'
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async _ => {
     const allPostsData = getSortedPostsData()
     return {
         props: {

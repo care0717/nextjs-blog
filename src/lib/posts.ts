@@ -8,7 +8,7 @@ const postsDirectory = path.join(process.cwd(), 'src/pages/posts')
 
 export interface PostData {
     id: string
-    contentHtml: string
+    contentHtml?: string
     title: any
     date: any
 }
@@ -29,7 +29,7 @@ export function getAllPostIds() {
     //     }
     //   }
     // ]
-    return fileNames.map(fileName => {
+    return fileNames.filter(fileNames => fileNames.includes(".md")).map(fileName => {
         return {
             params: {
                 id: fileName.replace(/\.md$/, '')
@@ -56,8 +56,7 @@ export function getSortedPostsData(): PostData[] {
         // Combine the data with the id
         return {
             id,
-            date: matterResult.data["date"],
-            title: matterResult.data["title"]
+            ...(matterResult.data as { date: string; title: string })
         }
     })
     // Sort posts by date
@@ -90,7 +89,6 @@ export async function getPostData(id): Promise<PostData> {
     return {
         id,
         contentHtml,
-        date: matterResult.data["date"],
-        title: matterResult.data["title"]
+        ...(matterResult.data as { date: string; title: string })
     }
 }
